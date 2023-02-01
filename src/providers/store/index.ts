@@ -1,32 +1,27 @@
-import { createStore, createLogger } from 'vuex'
+import { createStore, createLogger } from "vuex";
 
-import {
-	SystemModule,
-} from "@providers/store/system";
+import { SystemModule } from "@providers/store/system";
 
 import type {
-	Store as SystemStore,
-	SystemState,
+  Store as SystemStore,
+  SystemState,
 } from "@providers/store/system";
 
-
 export type State = {
-	system: SystemState;
-}
+  system: SystemState;
+};
 
-export type Store = SystemStore<Pick<State, "system">>
+export type Store = SystemStore<Pick<State, "system">>;
 
 const store = createStore({
-	plugins: import.meta.env.NODE_ENV === "production" ? [] : [createLogger()],
-    modules: {
-		system: SystemModule,
-	},
-})
-
+  plugins: import.meta.env.NODE_ENV === "production" ? [] : [createLogger()],
+  modules: {
+    system: SystemModule,
+  },
+});
 
 export function useStore() {
-	return store as Store;
+  return store as Store;
 }
 
-
-export default store
+export default store;

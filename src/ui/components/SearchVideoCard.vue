@@ -1,5 +1,5 @@
 <template>
-  <Card class="bc-video-card">
+  <p-card class="bc-video-card">
     <template #content>
       <div class="d-flex gap-2">
         <img :src="video.thumbnails.medium.url" alt="Video thumbnail" />
@@ -11,12 +11,12 @@
         </div>
       </div>
     </template>
-  </Card>
+  </p-card>
 </template>
 
 <script setup lang="ts">
-import { VideoSearch } from "@modules/google";
-import { PropType } from "vue";
+import type { VideoSearch } from "@modules/google";
+import type { PropType } from "vue";
 
 defineProps({
   video: {
@@ -30,7 +30,7 @@ defineProps({
 .bc-video-card {
   flex: 1 0 45%;
   gap: 8px;
-  
+
   img {
     object-fit: contain;
     width: 320px;

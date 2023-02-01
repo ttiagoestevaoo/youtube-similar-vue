@@ -2,20 +2,22 @@
   <div>
     <div class="bc-home">
       <div class="bc-home__main">
-        <Card class="bc-home__main__main-card">
+        <p-card class="bc-home__main__main-card">
           <template #header>
-            <p class="bc-section-title ">Vídeos em alta no Brasil</p>
+            <p class="bc-section-title">Vídeos em alta no Brasil</p>
           </template>
 
           <template #content>
             <div class="d-flex gap-2">
               <div class="bc-home__main-video">
                 <template v-if="getVideosList.length > 0">
-                    <img
-                      :src="getVideosList[0].thumbnails.maxres.url"
-                    />
-                    <p class="bc-home__main-video__channel">{{ getVideosList[0].channelTitle }} </p>
-                    <p class="bc-home__main-video__tittle"> {{ getVideosList[0].title }} </p>
+                  <img :src="getVideosList[0].thumbnails.maxres.url" />
+                  <p class="bc-home__main-video__channel">
+                    {{ getVideosList[0].channelTitle }}
+                  </p>
+                  <p class="bc-home__main-video__tittle">
+                    {{ getVideosList[0].title }}
+                  </p>
                 </template>
               </div>
               <div class="gap-4">
@@ -29,14 +31,15 @@
                 />
               </div>
             </div>
-
           </template>
-        </Card>
+        </p-card>
       </div>
       <div class="bc-home__secondary">
-        <Card class="mt-5">
+        <p-card class="mt-5">
           <template #header>
-            <p class="bc-section-title">Vídeos em alta de tecnologia no Brasil</p>
+            <p class="bc-section-title">
+              Vídeos em alta de tecnologia no Brasil
+            </p>
           </template>
 
           <template #content>
@@ -48,7 +51,7 @@
               />
             </div>
           </template>
-        </Card>
+        </p-card>
       </div>
     </div>
   </div>
@@ -58,23 +61,20 @@
 import HomeVideoCard from "@ui/components/HomeVideoCard.vue";
 import { useStore } from "@providers/store";
 import { SystemActionTypes } from "@providers/store/system";
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted } from "vue";
 
-const store = useStore()
+const store = useStore();
 const getVideosList = computed(() => store.getters.getHomePageVideos);
 const getTecnologyPageVideos = computed(
   () => store.getters.getTecnologyPageVideos
-)
+);
 
 onMounted(async () => {
   await Promise.all([
     store.dispatch(SystemActionTypes.GET_HOME_PAGE_VIDEOS),
     store.dispatch(SystemActionTypes.GET_TECNOLOGY_PAGE_VIDEOS),
-  ])
-})
-
-
-
+  ]);
+});
 </script>
 
 <style scoped lang="scss">
@@ -92,8 +92,5 @@ onMounted(async () => {
       font-size: 18px;
     }
   }
-
 }
-
-
 </style>

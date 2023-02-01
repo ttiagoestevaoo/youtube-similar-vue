@@ -1,5 +1,5 @@
 <template>
-  <AutoComplete
+  <p-auto-complete
     :model-value="modelValue"
     @update:model-value="$emit('update:modelValue', $event)"
     :suggestions="filteredSuggestions"
@@ -10,27 +10,29 @@
 
 <script setup lang="ts">
 import { useStore } from "@providers/store";
-import { computed, ref } from "vue"
+import { computed, ref } from "vue";
 
-const store = useStore()
+const store = useStore();
 
 defineProps({
   modelValue: {
-      type: String,
-      required: true
-  }
-})
+    type: String,
+    required: true,
+  },
+});
 
-defineEmits(["update:modelValue"])
+defineEmits(["update:modelValue"]);
 
-const serchString = ref()
+const serchString = ref();
 
-const suggestions = computed(() => store.getters.getHistorySearch)
-const filteredSuggestions = computed(() => suggestions.value.filter(suggestion => suggestion.startsWith(serchString.value)))
+const suggestions = computed(() => store.getters.getHistorySearch);
+const filteredSuggestions = computed(() =>
+  suggestions.value.filter((suggestion) =>
+    suggestion.startsWith(serchString.value)
+  )
+);
 
 const searchHistory = (event: any) => {
-  serchString.value = event.query
-}
-
-
+  serchString.value = event.query;
+};
 </script>

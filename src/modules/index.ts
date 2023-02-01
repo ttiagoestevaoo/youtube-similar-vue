@@ -1,1 +1,1 @@
-export * from "@modules/google"
+export * from "@modules/google";

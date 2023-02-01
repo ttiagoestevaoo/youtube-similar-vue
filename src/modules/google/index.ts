@@ -1,2 +1,2 @@
-export * from "@modules/google/service"
-export * from "@modules/google/types"
+export * from "@modules/google/service";
+export * from "@modules/google/types";

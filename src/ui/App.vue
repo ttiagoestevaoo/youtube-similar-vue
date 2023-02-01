@@ -1,20 +1,19 @@
 <template>
   <div class="bc-app p-5">
     <div class="bc-header">
-        <div class="bc-header__title">
-          <router-link :to="{name: 'home'}">
-            <h3>Youtube</h3>
-          </router-link>
-          <span>Compartilhe o que há de melhor</span>
-        </div>
-
-        <div class="d-flex gap-2 align-items-center">
-          <SearchInput v-model="search"/>
-          <Button label="Buscar" :disabled="!search" @click="searchVideos"/>
-        </div>
-
+      <div class="bc-header__title">
+        <router-link :to="{ name: 'home' }">
+          <h3>Youtube</h3>
+        </router-link>
+        <span>Compartilhe o que há de melhor</span>
       </div>
-      <router-view> </router-view>
+
+      <div class="d-flex gap-2 align-items-center">
+        <SearchInput v-model="search" />
+        <p-button label="Buscar" :disabled="!search" @click="searchVideos" />
+      </div>
+    </div>
+    <router-view> </router-view>
   </div>
 </template>
 
@@ -25,22 +24,25 @@ import "primevue/resources/primevue.css";
 import "primeicons/primeicons.css";
 import { onMounted, ref } from "vue";
 import { useStore } from "@providers/store";
-import { SystemActionTypes, SystemMutationTypes } from "@providers/store/system";
+import { SystemMutationTypes } from "@providers/store/system";
 import { useRouter } from "vue-router";
 import { getHistoryLocalStorage } from "@providers/mixins";
 
-const store = useStore()
-const router = useRouter()
+const store = useStore();
+const router = useRouter();
 
-const search = ref("")
+const search = ref("");
 
 const searchVideos = async () => {
-  router.push({query: {search:search.value}, name: "videos", force: true},)
-}
+  router.push({ query: { search: search.value }, name: "videos", force: true });
+};
 
 onMounted(() => {
-  store.commit(SystemMutationTypes.SET_HISTORY_SEARCH, getHistoryLocalStorage())
-})
+  store.commit(
+    SystemMutationTypes.SET_HISTORY_SEARCH,
+    getHistoryLocalStorage()
+  );
+});
 </script>
 
 <style lang="scss">
@@ -73,7 +75,5 @@ onMounted(() => {
       color: var(--secondary-color);
     }
   }
-
 }
-
 </style>

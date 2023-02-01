@@ -11,8 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import { VideoList } from "@modules/google";
-import { PropType } from "vue";
+import type { VideoList } from "@modules/google";
+import type { PropType } from "vue";
 
 defineProps({
   video: {
