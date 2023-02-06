@@ -34,4 +34,17 @@ export const systemMutations: MutationTree<State> & SystemMutations<State> = {
     TEMP.historySearch = historySearch;
     state = TEMP;
   },
+  [SystemMutationTypes.SET_USER](state: State, user): void {
+    const TEMP = state;
+    TEMP.user = user;
+    state = TEMP;
+  },
+  [SystemMutationTypes.SET_MY_VIDEOS_LIST](
+    state: State,
+    videoList: VideoSearch[]
+  ): void {
+    const TEMP = state;
+    TEMP.myVideosList = videoList;
+    state = TEMP;
+  },
 };

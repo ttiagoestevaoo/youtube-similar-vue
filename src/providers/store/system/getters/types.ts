@@ -1,4 +1,4 @@
-import type { VideoList, VideoSearch } from "@modules/google";
+import type { User, VideoList, VideoSearch } from "@modules/google";
 import type { SystemState as State } from "@providers/store/system/state/types";
 
 export type SystemGetters = {
@@ -6,4 +6,6 @@ export type SystemGetters = {
   getTecnologyPageVideos(state: State): VideoList[];
   getVideosList(state: State): VideoSearch[];
   getHistorySearch(state: State): string[];
+  getUser(state: State): User;
+  getMyVideosList(state: State): VideoSearch[];
 };

@@ -1,5 +1,6 @@
 <template>
   <div class="bc-app p-5">
+    <Header />
     <div class="bc-header">
       <div class="bc-header__title">
         <router-link :to="{ name: 'home' }">
@@ -8,21 +9,26 @@
         <span>Compartilhe o que há de melhor</span>
       </div>
 
-      <div class="d-flex gap-2 align-items-center">
+      <div class="d-flex gap-2 align-items-center" v-if="hasToShowSearch">
         <SearchInput v-model="search" />
         <p-button label="Buscar" :disabled="!search" @click="searchVideos" />
       </div>
+      <router-link :to="{ name: 'my-videos' }">
+        <p>Meus vídeos</p>
+      </router-link>
     </div>
     <router-view> </router-view>
+    <p-toast></p-toast>
   </div>
 </template>
 
 <script setup lang="ts">
 import SearchInput from "@ui/components/SearchInput.vue";
+import Header from "@ui/components/Header.vue";
 import "primevue/resources/themes/saga-blue/theme.css";
 import "primevue/resources/primevue.css";
 import "primeicons/primeicons.css";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useStore } from "@providers/store";
 import { SystemMutationTypes } from "@providers/store/system";
 import { useRouter } from "vue-router";
@@ -37,12 +43,16 @@ const searchVideos = async () => {
   router.push({ query: { search: search.value }, name: "videos", force: true });
 };
 
-onMounted(() => {
+onMounted(async () => {
   store.commit(
     SystemMutationTypes.SET_HISTORY_SEARCH,
     getHistoryLocalStorage()
   );
 });
+
+const hasToShowSearch = computed(
+  () => router.currentRoute.value.name !== "my-videos"
+);
 </script>
 
 <style lang="scss">
@@ -54,14 +64,14 @@ onMounted(() => {
 
 .bc-header {
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   border-bottom: 1px solid black;
   padding-bottom: 16px;
   margin-bottom: 32px;
+  align-items: center;
 
   &__title {
     font-weight: bold;
-    flex: 0 0 50%;
 
     a {
       text-decoration: none;

@@ -14,4 +14,9 @@ export const routes = [
     name: "videos",
     component: () => import("@ui/views/videos/index.vue"),
   },
+  {
+    path: "/meus-videos",
+    name: "my-videos",
+    component: () => import("@ui/views/my_videos/index.vue"),
+  },
 ];

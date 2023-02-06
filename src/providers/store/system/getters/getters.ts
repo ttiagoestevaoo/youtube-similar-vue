@@ -8,4 +8,6 @@ export const systemGetters: GetterTree<State, RootState> & SystemGetters = {
   getTecnologyPageVideos: (state: State) => state.tecnologyVideos,
   getVideosList: (state: State) => state.videosList,
   getHistorySearch: (state: State) => state.historySearch.reverse(),
+  getUser: (state: State) => state.user,
+  getMyVideosList: (state: State) => state.myVideosList,
 };

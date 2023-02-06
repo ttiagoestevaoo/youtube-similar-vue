@@ -5,4 +5,10 @@ export const systemState: SystemState = {
   tecnologyVideos: [],
   videosList: [],
   historySearch: [],
+  user: {
+    name: "",
+    picture: "",
+    channelId: "",
+  },
+  myVideosList: [],
 };

@@ -1,6 +1,18 @@
+import { useSession } from "@providers/hooks";
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_URL;
-axios.defaults.baseURL = API_URL;
+const axiosWithToken = axios.create()
+axiosWithToken.interceptors.request.use((config: any) => {
 
-export default axios;
+	const { getToken } = useSession();
+    
+    const token = getToken()
+	if (token.hasSession) {
+		config.headers.authorization = `Bearer ${token.access_token}`
+	}
+
+	return config;
+});
+
+export {axiosWithToken, axios};
+

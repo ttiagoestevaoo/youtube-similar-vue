@@ -23,3 +23,22 @@ export type VideoSearch = {
   };
   channelTitle: string;
 };
+
+export type Token = {
+  access_token: string;
+};
+
+export type User = {
+  name: string;
+  picture: string;
+};
+
+export type Channel = {
+  channelId: string;
+};
+
+export type VideoPayload = {
+  description: string;
+  title: string;
+  media: any;
+};
